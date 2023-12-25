@@ -12,6 +12,7 @@ import com.example.restaurantreview.data.retrofit.ApiConfig
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.example.restaurantreview.util.Event
 
 class MainViewModel : ViewModel() {
     companion object {
@@ -27,6 +28,9 @@ class MainViewModel : ViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
+
+    private val _snackBar = MutableLiveData<Event<String>>()
+    val snackBar: LiveData<Event<String>> = _snackBar
 
     init {
         findRestaurant()
@@ -74,6 +78,8 @@ class MainViewModel : ViewModel() {
                 val responseBody = response.body()
                 if (response.isSuccessful && responseBody != null) {
                     _listReview.value = response.body()?.customerReviews
+//                    _snackBar.value = response.body()?.message
+                    _snackBar.value = Event(response.body()?.message.toString())
                 } else {
                     Log.e(TAG, "on Failure: ${response.message()}")
                 }
