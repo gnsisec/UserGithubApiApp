@@ -1,22 +1,19 @@
 package com.example.restaurantreview.ui
 
-import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import androidx.lifecycle.ViewModelProvider
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.example.restaurantreview.data.response.CustomerReviewsItem
-import com.example.restaurantreview.data.response.Restaurant
+import com.example.restaurantreview.data.response.ItemsItem
 import com.example.restaurantreview.databinding.ActivityMainBinding
-import com.google.android.material.snackbar.Snackbar
+import com.example.restaurantreview.viewmodel.SearchViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
+    private val searchViewModel by viewModels<SearchViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
 //        val mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
+
 //        mainViewModel.restaurant.observe(this) {
 //            setRestaurantData(it)
 //        }
@@ -36,13 +34,13 @@ class MainActivity : AppCompatActivity() {
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding.rvReview.addItemDecoration(itemDecoration)
 
-//        mainViewModel.listReview.observe(this) {
-//            setReviewData(it)
-//        }
-//
-//        mainViewModel.isLoading.observe(this) {
-//            showLoading(it)
-//        }
+        searchViewModel.itemList.observe(this) {
+            displayResult(it)
+        }
+
+        searchViewModel.isLoading.observe(this) {
+            showLoading(it)
+        }
 //
 //        mainViewModel.snackBar.observe(this) {
 //            it.getContentIfNotHandled()?.let { snackBar ->
@@ -55,7 +53,13 @@ class MainActivity : AppCompatActivity() {
 //        }
     }
 
-    private fun showLoading(isLoading : Boolean) {
+    private fun displayResult(searchResult: List<ItemsItem>) {
+        val adapter = SearchResultAdapter()
+        adapter.submitList(searchResult)
+        binding.rvReview.adapter = adapter
+    }
+
+    private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

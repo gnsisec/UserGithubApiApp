@@ -9,7 +9,7 @@ import retrofit2.http.*
 interface ApiService {
     @GET("search/users")
     @Headers("Authorization: token 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")
-    fun getSearchUsers (@Query("q") q : String ) : Call<GithubSearchUser>
+    fun getSearchUser (@Query("q") q : String ) : Call<GithubSearchUser>
 
     @GET("detail/{id}")
     fun getRestaurant (@Path("id") id : String) : Call<RestaurantResponse>
