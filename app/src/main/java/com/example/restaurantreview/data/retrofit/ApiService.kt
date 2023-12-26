@@ -1,11 +1,16 @@
 package com.example.restaurantreview.data.retrofit
 
+import com.example.restaurantreview.data.response.GithubSearchUser
 import com.example.restaurantreview.data.response.PostReviewResponse
 import com.example.restaurantreview.data.response.RestaurantResponse
 import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
+    @GET("search/users")
+    @Headers("Authorization: token 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")
+    fun getSearchUsers (@Query("q") q : String ) : Call<GithubSearchUser>
+
     @GET("detail/{id}")
     fun getRestaurant (@Path("id") id : String) : Call<RestaurantResponse>
 

@@ -11,10 +11,10 @@ class ApiConfig {
             val loggingInterceptor =
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             val client = OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
+                .addInterceptor(loggingInterceptor)  // TODO: remove this if we don't want debug
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://restaurant-api.dicoding.dev/")
+                .baseUrl("https://api.github.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

@@ -25,10 +25,10 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        val mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
-        mainViewModel.restaurant.observe(this) {
-            setRestaurantData(it)
-        }
+//        val mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
+//        mainViewModel.restaurant.observe(this) {
+//            setRestaurantData(it)
+//        }
 
         val layoutManager = LinearLayoutManager(this)
         binding.rvReview.layoutManager = layoutManager
@@ -36,46 +36,23 @@ class MainActivity : AppCompatActivity() {
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding.rvReview.addItemDecoration(itemDecoration)
 
-
-        mainViewModel.listReview.observe(this) {
-            setReviewData(it)
-        }
-
-        mainViewModel.isLoading.observe(this) {
-            showLoading(it)
-        }
-
-        mainViewModel.snackBar.observe(this) {
-            it.getContentIfNotHandled()?.let { snackBar ->
-                Snackbar.make(
-                    window.decorView.rootView,
-                    snackBar,
-                    Snackbar.LENGTH_SHORT
-                ).show()
-            }
-        }
-
-        binding.btnSend.setOnClickListener { view ->
-            mainViewModel.postReview(binding.txInput.text.toString())
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view.windowToken, 0)
-        }
-    }
-
-    private fun setRestaurantData(restaurant: Restaurant) {
-        binding.tvTitle.text = restaurant.name
-        binding.tvDescription.text = restaurant.description
-
-        Glide.with(this@MainActivity)
-            .load("https://restaurant-api.dicoding.dev/images/large/${restaurant.pictureId}")
-            .into(binding.ivPicture)
-    }
-
-    private fun setReviewData(customerReviews: List<CustomerReviewsItem>) {
-        val adapter = ReviewAdapter()
-        adapter.submitList(customerReviews)
-        binding.rvReview.adapter = adapter
-        binding.txInput.setText("")
+//        mainViewModel.listReview.observe(this) {
+//            setReviewData(it)
+//        }
+//
+//        mainViewModel.isLoading.observe(this) {
+//            showLoading(it)
+//        }
+//
+//        mainViewModel.snackBar.observe(this) {
+//            it.getContentIfNotHandled()?.let { snackBar ->
+//                Snackbar.make(
+//                    window.decorView.rootView,
+//                    snackBar,
+//                    Snackbar.LENGTH_SHORT
+//                ).show()
+//            }
+//        }
     }
 
     private fun showLoading(isLoading : Boolean) {
