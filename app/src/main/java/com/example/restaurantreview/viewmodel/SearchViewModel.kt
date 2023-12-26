@@ -27,7 +27,7 @@ class SearchViewModel : ViewModel() {
 //        searchUser("oqoweksdf")
     }
 
-    private fun searchUser(user: String) {
+     fun searchUser(user: String) {
         _isLoading.value = true
 
         val client = ApiConfig.getApiService().getSearchUser(user)

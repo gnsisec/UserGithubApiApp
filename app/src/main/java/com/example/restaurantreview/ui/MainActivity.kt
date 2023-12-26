@@ -2,6 +2,8 @@ package com.example.restaurantreview.ui
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -9,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.restaurantreview.data.response.ItemsItem
 import com.example.restaurantreview.databinding.ActivityMainBinding
 import com.example.restaurantreview.viewmodel.SearchViewModel
+import com.google.android.material.search.SearchBar
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,7 +23,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.hide()
+        with(binding) {
+            searchView.setupWithSearchBar(searchBar)
+            searchView
+                .editText
+                .setOnEditorActionListener { textView, actionId, event ->
+                    searchView.hide()
+                    searchBar.setText(searchView.text.toString())
+                    searchViewModel.searchUser(searchBar.text.toString())
+                    false
+                }
+        }
+
+//        supportActionBar?.hide()
 
 //        val mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
 
