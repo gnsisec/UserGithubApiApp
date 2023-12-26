@@ -23,23 +23,24 @@ class SearchViewModel : ViewModel() {
     val isLoading: LiveData<Boolean> = _isLoading
 
     init {
-        searchUser("matt")
+        searchUser("david")
 //        searchUser("oqoweksdf")
     }
 
-    private fun searchUser( user: String) {
+    private fun searchUser(user: String) {
         _isLoading.value = true
 
         val client = ApiConfig.getApiService().getSearchUser(user)
-        client.enqueue( object : Callback<GithubSearchUser> {
+        client.enqueue(object : Callback<GithubSearchUser> {
             override fun onResponse(
                 call: Call<GithubSearchUser>,
                 response: Response<GithubSearchUser>,
             ) {
                 _isLoading.value = false
-                if (response.isSuccessful && response.body() != null) {
+                if (response.body()?.items?.isNotEmpty() == true) {
                     _itemList.value = response.body()?.items!!
                 } else {
+                    // TODO: Toast something if search is not found
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
             }

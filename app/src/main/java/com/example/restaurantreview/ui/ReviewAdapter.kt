@@ -9,7 +9,8 @@ import com.example.restaurantreview.data.response.CustomerReviewsItem
 import com.example.restaurantreview.databinding.ItemReviewBinding
 
 class ReviewAdapter : ListAdapter<CustomerReviewsItem, ReviewAdapter.ViewHolder>(DIFF_CALLBACK) {
-    class ViewHolder(private val binding: ItemReviewBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ItemReviewBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(review: CustomerReviewsItem) {
             binding.tvItem.text = "${review.review}\n- ${review.name}"
         }

@@ -9,10 +9,10 @@ import com.example.restaurantreview.data.response.PostReviewResponse
 import com.example.restaurantreview.data.response.Restaurant
 import com.example.restaurantreview.data.response.RestaurantResponse
 import com.example.restaurantreview.data.retrofit.ApiConfig
+import com.example.restaurantreview.util.Event
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import com.example.restaurantreview.util.Event
 
 class MainViewModel : ViewModel() {
     companion object {
@@ -40,7 +40,7 @@ class MainViewModel : ViewModel() {
         _isLoading.value = true
 
         val client = ApiConfig.getApiService().getRestaurant(RESTAURANT_ID)
-        client.enqueue( object : Callback<RestaurantResponse> {
+        client.enqueue(object : Callback<RestaurantResponse> {
             override fun onResponse(
                 call: Call<RestaurantResponse>,
                 response: Response<RestaurantResponse>,
@@ -69,7 +69,7 @@ class MainViewModel : ViewModel() {
         _isLoading.value = true
 
         val client = ApiConfig.getApiService().postReview(RESTAURANT_ID, "Jamet123", review)
-        client.enqueue( object : Callback<PostReviewResponse>{
+        client.enqueue(object : Callback<PostReviewResponse> {
             override fun onResponse(
                 call: Call<PostReviewResponse>,
                 response: Response<PostReviewResponse>,

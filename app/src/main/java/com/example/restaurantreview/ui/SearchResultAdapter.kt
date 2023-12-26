@@ -1,19 +1,29 @@
 package com.example.restaurantreview.ui
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.restaurantreview.data.response.CustomerReviewsItem
-import com.example.restaurantreview.data.response.GithubSearchUser
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.restaurantreview.data.response.ItemsItem
 import com.example.restaurantreview.databinding.ItemReviewBinding
 
 class SearchResultAdapter : ListAdapter<ItemsItem, SearchResultAdapter.ViewHolder>(DIFF_CALLBACK) {
-    class ViewHolder(private val binding: ItemReviewBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(review: ItemsItem) {
-            binding.tvItem.text = "${review.login}"
+    class ViewHolder(private val binding: ItemReviewBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(userInfo: ItemsItem) {
+            binding.tvItem.text = "${userInfo.login}".replaceFirstChar { it.uppercase() }
+            Glide.with(this@ViewHolder.itemView.context).load("${userInfo.avatarUrl}")
+                .diskCacheStrategy(DiskCacheStrategy.DATA).into(binding.ivItem)
+            binding.itemReview.setOnClickListener {
+                // TODO: Add Detail Profile Listener 
+                Log.d("SearchResultAdapter", "click on ${userInfo.login}")
+                Toast.makeText(this@ViewHolder.itemView.context, "click on ${userInfo.login}", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
