@@ -9,6 +9,7 @@ import com.example.restaurantreview.data.retrofit.ApiConfig
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.Objects
 
 class ProfileViewModel : ViewModel() {
     companion object {
@@ -47,7 +48,7 @@ class ProfileViewModel : ViewModel() {
                 val responseBody = response.body()
                 if (response.body() != null) {
                     _username.value = responseBody?.login
-                    _displayName.value = responseBody?.name
+                    _displayName.value = responseBody?.name ?: " "
                     _followings.value = responseBody?.following
                     _followers.value = responseBody?.followers
                     _avatar.value = responseBody?.avatarUrl

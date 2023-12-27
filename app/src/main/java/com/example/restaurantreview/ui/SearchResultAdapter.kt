@@ -23,11 +23,11 @@ class SearchResultAdapter : ListAdapter<ItemsItem, SearchResultAdapter.ViewHolde
             binding.tvItem.text = "${userInfo.login}".replaceFirstChar { it.uppercase() }
             Glide.with(this@ViewHolder.itemView.context).load("${userInfo.avatarUrl}")
                 .diskCacheStrategy(DiskCacheStrategy.DATA).into(binding.ivItem)
+
             binding.itemReview.setOnClickListener {
-                it.context.startActivity(Intent(it.context, DetailUser::class.java))
-                // TODO: Add Detail Profile Listener
-                // Log.d("SearchResultAdapter", "click on ${userInfo.login}")
-                // Toast.makeText(this@ViewHolder.itemView.context, "click on ${userInfo.login}", Toast.LENGTH_SHORT).show()
+                val intent = Intent((it.context), DetailUser::class.java);
+                intent.putExtra("username", "${userInfo.login}")
+                it.context.startActivity(intent)
             }
         }
     }

@@ -2,5 +2,6 @@
     <string name="app_name">Restaurant Review</string>
     <string name="dummy_username">Username</string>
     <string name="searchbar_hint">Search keyword...</string>
-    <string name="following_follower">%d Followers                 %d Following</string>
+    <string name="follower_stat">%d Followers</string>
+    <string name="following_stat">%d Followings</string>
 </resources>
