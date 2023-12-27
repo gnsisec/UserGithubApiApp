@@ -1,5 +1,7 @@
 package com.example.restaurantreview.ui
 
+import android.content.Intent
+import android.os.Build.VERSION_CODES.P
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,8 +11,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.restaurantreview.data.response.GithubUserProfile
 import com.example.restaurantreview.data.response.ItemsItem
 import com.example.restaurantreview.databinding.ItemReviewBinding
+import kotlinx.coroutines.withContext
 
 class SearchResultAdapter : ListAdapter<ItemsItem, SearchResultAdapter.ViewHolder>(DIFF_CALLBACK) {
     class ViewHolder(private val binding: ItemReviewBinding) :
@@ -20,9 +24,10 @@ class SearchResultAdapter : ListAdapter<ItemsItem, SearchResultAdapter.ViewHolde
             Glide.with(this@ViewHolder.itemView.context).load("${userInfo.avatarUrl}")
                 .diskCacheStrategy(DiskCacheStrategy.DATA).into(binding.ivItem)
             binding.itemReview.setOnClickListener {
-                // TODO: Add Detail Profile Listener 
-                Log.d("SearchResultAdapter", "click on ${userInfo.login}")
-                Toast.makeText(this@ViewHolder.itemView.context, "click on ${userInfo.login}", Toast.LENGTH_SHORT).show()
+                it.context.startActivity(Intent(it.context, DetailUser::class.java))
+                // TODO: Add Detail Profile Listener
+                // Log.d("SearchResultAdapter", "click on ${userInfo.login}")
+                // Toast.makeText(this@ViewHolder.itemView.context, "click on ${userInfo.login}", Toast.LENGTH_SHORT).show()
             }
         }
     }
