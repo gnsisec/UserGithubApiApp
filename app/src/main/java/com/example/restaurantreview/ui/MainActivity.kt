@@ -2,8 +2,6 @@ package com.example.restaurantreview.ui
 
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -11,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.restaurantreview.data.response.ItemsItem
 import com.example.restaurantreview.databinding.ActivityMainBinding
 import com.example.restaurantreview.viewmodel.SearchViewModel
-import com.google.android.material.search.SearchBar
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,14 +32,6 @@ class MainActivity : AppCompatActivity() {
                 }
         }
 
-//        supportActionBar?.hide()
-
-//        val mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
-
-//        mainViewModel.restaurant.observe(this) {
-//            setRestaurantData(it)
-//        }
-
         val layoutManager = LinearLayoutManager(this)
         binding.rvReview.layoutManager = layoutManager
 
@@ -56,16 +45,6 @@ class MainActivity : AppCompatActivity() {
         searchViewModel.isLoading.observe(this) {
             showLoading(it)
         }
-//
-//        mainViewModel.snackBar.observe(this) {
-//            it.getContentIfNotHandled()?.let { snackBar ->
-//                Snackbar.make(
-//                    window.decorView.rootView,
-//                    snackBar,
-//                    Snackbar.LENGTH_SHORT
-//                ).show()
-//            }
-//        }
     }
 
     private fun displayResult(searchResult: List<ItemsItem>) {

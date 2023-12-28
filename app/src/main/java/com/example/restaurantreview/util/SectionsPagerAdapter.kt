@@ -7,6 +7,12 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.restaurantreview.ui.FollowStatsFragment
 
 class SectionsPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity) {
+
+    companion object {
+        private const val TAG = "SectionPagerAdapter"
+    }
+
+
     var username: String = ""
     override fun getItemCount(): Int {
         return 2

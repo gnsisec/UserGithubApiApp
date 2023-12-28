@@ -23,8 +23,8 @@ class SearchViewModel : ViewModel() {
     val isLoading: LiveData<Boolean> = _isLoading
 
     init {
-        searchUser("david")
-//        searchUser("oqoweksdf")
+        searchUser("pooltogether")
+        // searchUser("oqoweksdf")
     }
 
      fun searchUser(user: String) {
@@ -40,7 +40,7 @@ class SearchViewModel : ViewModel() {
                 if (response.body()?.items?.isNotEmpty() == true) {
                     _itemList.value = response.body()?.items!!
                 } else {
-                    // TODO: Toast something if search is not found
+                    // TODO: if response body is empty then return message user not found
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
             }

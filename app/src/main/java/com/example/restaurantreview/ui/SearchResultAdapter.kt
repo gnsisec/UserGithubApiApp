@@ -20,7 +20,7 @@ class SearchResultAdapter : ListAdapter<ItemsItem, SearchResultAdapter.ViewHolde
                 .diskCacheStrategy(DiskCacheStrategy.DATA).into(binding.ivItem)
 
             binding.itemReview.setOnClickListener {
-                val intent = Intent((it.context), DetailUser::class.java);
+                val intent = Intent((it.context), UserProfileActivity::class.java)
                 intent.putExtra("username", "${userInfo.login}")
                 it.context.startActivity(intent)
             }
