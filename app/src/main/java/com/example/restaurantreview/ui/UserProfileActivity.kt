@@ -38,17 +38,17 @@ class UserProfileActivity : AppCompatActivity() {
         binding = ActivityDetailUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        profileViewModel.userProfile.observe(this) {
-            showUserProfile(it)
-        }
-
-        // TODO: This should be DRY. Duplicate with MainActivity
-        // TODO: Create a helper / util for this
-        profileViewModel.isLoading.observe(this) {
-            showLoading(it)
-        }
-
         username = intent.getStringExtra("username").toString()
+
+        with(profileViewModel) {
+            userProfile.observe(this@UserProfileActivity) {
+                showUserProfile(it)
+            }
+            isLoading.observe(this@UserProfileActivity) {
+                showLoading(it)
+            }
+            getProfile(username)
+        }
 
         val sectionsPagerAdapter = SectionsPagerAdapter(this)
         sectionsPagerAdapter.username = username

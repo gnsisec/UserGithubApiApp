@@ -24,7 +24,6 @@ class SearchViewModel : ViewModel() {
 
     init {
         searchUser("Bambang")
-        // searchUser("oqoweksdf")
     }
 
      fun searchUser(user: String) {

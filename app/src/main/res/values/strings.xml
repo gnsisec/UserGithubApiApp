@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Restaurant Review</string>
+    <string name="app_name">Fz Github Users</string>
     <string name="dummy_username">Mock username </string>
     <string name="searchbar_hint">Search user here...</string>
     <string name="follower_stat">%d Followers</string>

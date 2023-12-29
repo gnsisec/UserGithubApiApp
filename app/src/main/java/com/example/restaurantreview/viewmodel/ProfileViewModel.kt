@@ -29,16 +29,9 @@ class ProfileViewModel : ViewModel() {
     private val _listFollowing = MutableLiveData<List<ItemsItem>>()
     val listFollowing: LiveData<List<ItemsItem>> = _listFollowing
 
-    // TODO: Kepanggil dua kali ???
-    //  Iya karena 2 kali di init di UserProfileActivity + FollowStatsFragment
-    init {
-        showProfile(username!!)
-    }
-
-    private fun showProfile(user: String) {
+    fun getProfile(user: String) {
         // TODO: remove log nya sebelum submit
         Log.d(TAG, "showProfile ke panggil lagi ni")
-        _isLoading.value = true
         val client = ApiConfig.getApiService().getUserProfile(user)
         client.enqueue(object : Callback<GithubUserProfile> {
             override fun onResponse(
@@ -60,7 +53,7 @@ class ProfileViewModel : ViewModel() {
         })
     }
 
-    fun showFollowers(user: String) {
+    fun getFollowers(user: String) {
         _isLoading.value = true
 
         val client = ApiConfig.getApiService().getFollowers(user)
@@ -86,7 +79,7 @@ class ProfileViewModel : ViewModel() {
         })
     }
 
-    fun showFollowing(user: String) {
+    fun getFollowing(user: String) {
         _isLoading.value = true
 
         val client = ApiConfig.getApiService().getFollowings(user)

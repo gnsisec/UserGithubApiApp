@@ -9,15 +9,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.restaurantreview.data.response.ItemsItem
-import com.example.restaurantreview.databinding.FragmentFollowStatsBinding
+import com.example.restaurantreview.databinding.FragmentLsitFollowBinding
 import com.example.restaurantreview.ui.adapter.SearchResultAdapter
 import com.example.restaurantreview.viewmodel.ProfileViewModel
 
 
-class FollowStatsFragment : Fragment() {
+class ListFollowFragment : Fragment() {
 
     private val profileViewModel by viewModels<ProfileViewModel>()
-    private var _binding: FragmentFollowStatsBinding? = null
+    private var _binding: FragmentLsitFollowBinding? = null
     private val binding get() = _binding!!
 
     companion object {
@@ -33,23 +33,23 @@ class FollowStatsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentFollowStatsBinding.inflate(inflater, container, false)
+        _binding = FragmentLsitFollowBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        profileViewModel.listFollower.observe(viewLifecycleOwner) {
-            displayFollowList(it)
-        }
-
-        profileViewModel.listFollowing.observe(viewLifecycleOwner) {
-            displayFollowList(it)
-        }
-
-        profileViewModel.isLoading.observe(viewLifecycleOwner) {
-            showLoading(it)
+        with(profileViewModel) {
+            listFollower.observe(viewLifecycleOwner) {
+                showListFollow(it)
+            }
+            listFollowing.observe(viewLifecycleOwner) {
+                showListFollow(it)
+            }
+            isLoading.observe(viewLifecycleOwner) {
+                showLoading(it)
+            }
         }
 
         arguments?.let {
@@ -58,11 +58,11 @@ class FollowStatsFragment : Fragment() {
         }
 
         if (position == 1) {
-            profileViewModel.showFollowers(username!!)
+            profileViewModel.getFollowers(username!!)
             // TODO: remove log nya sebelum submit
             Log.d(TAG, "showFollowers with $username")
         } else {
-            profileViewModel.showFollowing(username!!)
+            profileViewModel.getFollowing(username!!)
             // TODO: remove log nya sebelum submit
             Log.d(TAG, "showFollowing with $username")
         }
@@ -73,10 +73,10 @@ class FollowStatsFragment : Fragment() {
         _binding = null
     }
 
-    private fun displayFollowList(followList: List<ItemsItem>) {
-        binding.listFollow.layoutManager = LinearLayoutManager(requireActivity())
+    private fun showListFollow(followList: List<ItemsItem>) {
         val adapter = SearchResultAdapter()
         adapter.submitList(followList)
+        binding.listFollow.layoutManager = LinearLayoutManager(requireActivity())
         binding.listFollow.adapter = adapter
     }
 
