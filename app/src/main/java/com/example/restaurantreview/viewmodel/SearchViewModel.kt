@@ -23,7 +23,7 @@ class SearchViewModel : ViewModel() {
     val isLoading: LiveData<Boolean> = _isLoading
 
     init {
-        searchUser("pooltogether")
+        searchUser("Bambang")
         // searchUser("oqoweksdf")
     }
 

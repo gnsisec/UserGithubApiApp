@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.restaurantreview.data.response.ItemsItem
 import com.example.restaurantreview.databinding.ActivityMainBinding
+import com.example.restaurantreview.ui.adapter.SearchResultAdapter
 import com.example.restaurantreview.viewmodel.SearchViewModel
 
 class MainActivity : AppCompatActivity() {

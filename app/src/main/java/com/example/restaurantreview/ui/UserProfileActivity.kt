@@ -1,6 +1,7 @@
 package com.example.restaurantreview.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
@@ -19,9 +20,12 @@ import com.google.android.material.tabs.TabLayoutMediator
 class UserProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailUserBinding
-    private val profileViewModel by viewModels<ProfileViewModel>()
+    private val profileViewModel: ProfileViewModel by viewModels()
 
     companion object {
+        var username: String = ""
+        const val TAG = "UserProfileActivity"
+
         @StringRes
         private val TAB_TITLES = intArrayOf(
             R.string.tab_text_1,
@@ -44,13 +48,14 @@ class UserProfileActivity : AppCompatActivity() {
             showLoading(it)
         }
 
-        val username = intent.getStringExtra("username").toString()
-        profileViewModel.showProfile(username)
+        username = intent.getStringExtra("username").toString()
 
         val sectionsPagerAdapter = SectionsPagerAdapter(this)
         sectionsPagerAdapter.username = username
+
         val viewPager: ViewPager2 = binding.viewPager
         viewPager.adapter = sectionsPagerAdapter
+
         val tabs: TabLayout = binding.tabs
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
@@ -59,6 +64,8 @@ class UserProfileActivity : AppCompatActivity() {
     }
 
     private fun showUserProfile(profile: GithubUserProfile) {
+        // TODO: remove log nya sebelum submit
+        Log.d(TAG, "showUserProfile ke panggil lagi ni")
         binding.tvUsername.text = profile.login
         binding.tvDisplayName.text = profile.name
         Glide.with(this@UserProfileActivity).load(profile.avatarUrl)

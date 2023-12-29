@@ -10,7 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.restaurantreview.data.response.ItemsItem
 import com.example.restaurantreview.databinding.FragmentFollowStatsBinding
+import com.example.restaurantreview.ui.adapter.SearchResultAdapter
 import com.example.restaurantreview.viewmodel.ProfileViewModel
+
 
 class FollowStatsFragment : Fragment() {
 
@@ -25,7 +27,7 @@ class FollowStatsFragment : Fragment() {
     }
 
     private var position: Int = 0
-    private var username: String? = null
+    private var username: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,8 +39,6 @@ class FollowStatsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.listFollow.layoutManager = LinearLayoutManager(requireActivity())
 
         profileViewModel.listFollower.observe(viewLifecycleOwner) {
             displayFollowList(it)
@@ -54,14 +54,16 @@ class FollowStatsFragment : Fragment() {
 
         arguments?.let {
             position = it.getInt(ARG_POSITION)
-            username = it.getString(ARG_USERNAME).toString()
+            username = it.getString(ARG_USERNAME).toString()!!
         }
 
         if (position == 1) {
             profileViewModel.showFollowers(username!!)
+            // TODO: remove log nya sebelum submit
             Log.d(TAG, "showFollowers with $username")
         } else {
             profileViewModel.showFollowing(username!!)
+            // TODO: remove log nya sebelum submit
             Log.d(TAG, "showFollowing with $username")
         }
     }
@@ -72,9 +74,9 @@ class FollowStatsFragment : Fragment() {
     }
 
     private fun displayFollowList(followList: List<ItemsItem>) {
+        binding.listFollow.layoutManager = LinearLayoutManager(requireActivity())
         val adapter = SearchResultAdapter()
         adapter.submitList(followList)
-        Log.d(TAG, "update with submitList $followList")
         binding.listFollow.adapter = adapter
     }
 

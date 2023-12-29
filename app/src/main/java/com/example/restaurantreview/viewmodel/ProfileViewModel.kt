@@ -13,6 +13,7 @@ import retrofit2.Response
 
 class ProfileViewModel : ViewModel() {
     companion object {
+        var username: String? = ""
         private const val TAG = "ProfileViewModel"
     }
 
@@ -28,7 +29,15 @@ class ProfileViewModel : ViewModel() {
     private val _listFollowing = MutableLiveData<List<ItemsItem>>()
     val listFollowing: LiveData<List<ItemsItem>> = _listFollowing
 
-    fun showProfile(user: String) {
+    // TODO: Kepanggil dua kali ???
+    //  Iya karena 2 kali di init di UserProfileActivity + FollowStatsFragment
+    init {
+        showProfile(username!!)
+    }
+
+    private fun showProfile(user: String) {
+        // TODO: remove log nya sebelum submit
+        Log.d(TAG, "showProfile ke panggil lagi ni")
         _isLoading.value = true
         val client = ApiConfig.getApiService().getUserProfile(user)
         client.enqueue(object : Callback<GithubUserProfile> {
@@ -64,12 +73,14 @@ class ProfileViewModel : ViewModel() {
                 if (!response.body().isNullOrEmpty()) {
                     _listFollower.value = response.body()
                 } else {
-                    Log.e(TAG, "onFailure: ${response.message()}")
+                    _listFollower.value = listOf()
+                    Log.e(TAG, "_listFollower onFailure: $response")
                 }
             }
 
             override fun onFailure(call: Call<List<ItemsItem>>, t: Throwable) {
                 _isLoading.value = false
+                // TODO: remove log nya sebelum submit
                 Log.e(TAG, "onFailure: ${t.message}")
             }
         })
@@ -88,7 +99,8 @@ class ProfileViewModel : ViewModel() {
                 if (!response.body().isNullOrEmpty()) {
                     _listFollowing.value = response.body()
                 } else {
-                    Log.e(TAG, "onFailure: ${response.message()}")
+                    _listFollower.value = listOf()
+                    Log.e(TAG, "_listFollowing onFailure: ${response.message()}")
                 }
             }
 

@@ -1,4 +1,4 @@
-package com.example.restaurantreview.ui
+package com.example.restaurantreview.ui.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -10,8 +10,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.restaurantreview.data.response.ItemsItem
 import com.example.restaurantreview.databinding.ItemReviewBinding
+import com.example.restaurantreview.ui.UserProfileActivity
+import com.example.restaurantreview.viewmodel.ProfileViewModel
 
-class SearchResultAdapter : ListAdapter<ItemsItem, SearchResultAdapter.ViewHolder>(DIFF_CALLBACK) {
+class SearchResultAdapter() :
+    ListAdapter<ItemsItem, SearchResultAdapter.ViewHolder>(DIFF_CALLBACK) {
     class ViewHolder(private val binding: ItemReviewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(userInfo: ItemsItem) {
@@ -22,6 +25,7 @@ class SearchResultAdapter : ListAdapter<ItemsItem, SearchResultAdapter.ViewHolde
             binding.itemReview.setOnClickListener {
                 val intent = Intent((it.context), UserProfileActivity::class.java)
                 intent.putExtra("username", "${userInfo.login}")
+                ProfileViewModel.username = userInfo.login.toString()
                 it.context.startActivity(intent)
             }
         }
