@@ -1,11 +1,10 @@
 package com.example.restaurantreview.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -14,16 +13,14 @@ import com.example.restaurantreview.data.response.GithubUserProfile
 import com.example.restaurantreview.databinding.ActivityDetailUserBinding
 import com.example.restaurantreview.util.SectionsPagerAdapter
 import com.example.restaurantreview.viewmodel.ProfileViewModel
+import com.example.restaurantreview.viewmodel.ProfileViewModelFactory
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class UserProfileActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityDetailUserBinding
-    private val profileViewModel: ProfileViewModel by viewModels()
 
     companion object {
-        var username: String = ""
         const val TAG = "UserProfileActivity"
 
         @StringRes
@@ -38,7 +35,10 @@ class UserProfileActivity : AppCompatActivity() {
         binding = ActivityDetailUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        username = intent.getStringExtra("username").toString()
+        val username = intent?.getStringExtra("username").toString()
+        val profileViewModelFactory = ProfileViewModelFactory(username)
+        val profileViewModel =
+            ViewModelProvider(this, profileViewModelFactory)[ProfileViewModel::class.java]
 
         with(profileViewModel) {
             userProfile.observe(this@UserProfileActivity) {
@@ -47,7 +47,6 @@ class UserProfileActivity : AppCompatActivity() {
             isLoading.observe(this@UserProfileActivity) {
                 showLoading(it)
             }
-            getProfile(username)
         }
 
         val sectionsPagerAdapter = SectionsPagerAdapter(this)
@@ -64,8 +63,6 @@ class UserProfileActivity : AppCompatActivity() {
     }
 
     private fun showUserProfile(profile: GithubUserProfile) {
-        // TODO: remove log nya sebelum submit
-        Log.d(TAG, "showUserProfile ke panggil lagi ni")
         binding.tvUsername.text = profile.login
         binding.tvDisplayName.text = profile.name
         Glide.with(this@UserProfileActivity).load(profile.avatarUrl)

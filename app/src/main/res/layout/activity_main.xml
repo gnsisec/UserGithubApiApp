@@ -13,10 +13,8 @@
         android:hint="@string/searchbar_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"></com.google.android.material.search.SearchBar>
 
-    </com.google.android.material.search.SearchBar>
-    
     <com.google.android.material.search.SearchView
         android:id="@+id/search_view"
         android:layout_width="0dp"
@@ -26,16 +24,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </com.google.android.material.search.SearchView>
+        app:layout_constraintTop_toTopOf="parent"></com.google.android.material.search.SearchView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="19dp"
         android:id="@+id/rv_review"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
         app:layout="@layout/item_review"
-        app:layout_constraintTop_toBottomOf="@+id/search_bar"/>
+        app:layout_constraintTop_toBottomOf="@+id/search_bar" />
 
     <ProgressBar
         android:id="@+id/progress_bar"

@@ -1,24 +1,25 @@
 package com.example.restaurantreview.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.restaurantreview.data.response.ItemsItem
-import com.example.restaurantreview.databinding.FragmentLsitFollowBinding
+import com.example.restaurantreview.databinding.FragmentFollowBinding
 import com.example.restaurantreview.ui.adapter.SearchResultAdapter
-import com.example.restaurantreview.viewmodel.ProfileViewModel
+import com.example.restaurantreview.viewmodel.FollowViewModel
+import com.example.restaurantreview.viewmodel.FollowViewModelFactory
 
 
-class ListFollowFragment : Fragment() {
+class FollowFragment : Fragment() {
 
-    private val profileViewModel by viewModels<ProfileViewModel>()
-    private var _binding: FragmentLsitFollowBinding? = null
+    private var _binding: FragmentFollowBinding? = null
     private val binding get() = _binding!!
+    private var position: Int = 0
+    private var username = ""
 
     companion object {
         private const val TAG = "FollowStatsFragment"
@@ -26,45 +27,38 @@ class ListFollowFragment : Fragment() {
         var ARG_USERNAME = "username"
     }
 
-    private var position: Int = 0
-    private var username: String = ""
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentLsitFollowBinding.inflate(inflater, container, false)
+        _binding = FragmentFollowBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(profileViewModel) {
-            listFollower.observe(viewLifecycleOwner) {
-                showListFollow(it)
-            }
-            listFollowing.observe(viewLifecycleOwner) {
-                showListFollow(it)
-            }
-            isLoading.observe(viewLifecycleOwner) {
-                showLoading(it)
-            }
-        }
-
         arguments?.let {
             position = it.getInt(ARG_POSITION)
             username = it.getString(ARG_USERNAME).toString()!!
         }
 
+        val followViewModelFactory = FollowViewModelFactory(username)
+        val followViewModel =
+            ViewModelProvider(this, followViewModelFactory)[FollowViewModel::class.java]
+
+        followViewModel.isLoading.observe(viewLifecycleOwner) {
+            showLoading(it)
+        }
+
         if (position == 1) {
-            profileViewModel.getFollowers(username!!)
-            // TODO: remove log nya sebelum submit
-            Log.d(TAG, "showFollowers with $username")
+            followViewModel.listFollower.observe(viewLifecycleOwner) {
+                showListFollow(it)
+            }
         } else {
-            profileViewModel.getFollowing(username!!)
-            // TODO: remove log nya sebelum submit
-            Log.d(TAG, "showFollowing with $username")
+            followViewModel.listFollowing.observe(viewLifecycleOwner) {
+                showListFollow(it)
+            }
         }
     }
 

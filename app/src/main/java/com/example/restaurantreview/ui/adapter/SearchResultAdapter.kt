@@ -25,7 +25,6 @@ class SearchResultAdapter() :
             binding.itemReview.setOnClickListener {
                 val intent = Intent((it.context), UserProfileActivity::class.java)
                 intent.putExtra("username", "${userInfo.login}")
-                ProfileViewModel.username = userInfo.login.toString()
                 it.context.startActivity(intent)
             }
         }
