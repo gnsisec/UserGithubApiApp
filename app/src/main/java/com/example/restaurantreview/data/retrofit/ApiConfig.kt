@@ -9,8 +9,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ApiConfig {
     companion object {
         fun getApiService(): ApiService {
-            val loggingInterceptor =
-                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             val authInterceptor = Interceptor { chain ->
                 val req = chain.request()
                 val requestHeaders = req.newBuilder()
@@ -20,7 +18,6 @@ class ApiConfig {
             }
 
             val client = OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)  // TODO: remove this if we don't want debug
                 .addInterceptor(authInterceptor)
                 .build()
             val retrofit = Retrofit.Builder()

@@ -1,4 +1,4 @@
-package com.example.restaurantreview.viewmodel
+package com.example.restaurantreview.ui.follow
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -1,9 +1,9 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Fz Github Users</string>
     <string name="dummy_username">Mock username </string>
-    <string name="searchbar_hint">Search user here...</string>
-    <string name="follower_stat">%d Followers</string>
-    <string name="following_stat">%d Followings</string>
+    <string name="searchbar_hint">Search user here…</string>
+    <string name="follower_stat" tools:ignore="PluralsCandidate">%d Followers</string>
+    <string name="following_stat" tools:ignore="PluralsCandidate">%d Followings</string>
     <string name="tab_text_1">Followers</string>
     <string name="tab_text_2">Following</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.restaurantreview.ui
+package com.example.restaurantreview.ui.main
 
 import android.os.Bundle
 import android.view.View
@@ -6,10 +6,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.restaurantreview.data.response.ItemsItem
+import com.example.restaurantreview.data.response.UserAttributes
 import com.example.restaurantreview.databinding.ActivityMainBinding
-import com.example.restaurantreview.ui.adapter.SearchResultAdapter
-import com.example.restaurantreview.viewmodel.SearchViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun displayResult(searchResult: List<ItemsItem>) {
+    private fun displayResult(searchResult: List<UserAttributes>) {
         val adapter = SearchResultAdapter()
         adapter.submitList(searchResult)
         binding.rvReview.adapter = adapter

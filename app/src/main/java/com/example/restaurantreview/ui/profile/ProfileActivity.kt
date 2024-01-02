@@ -1,4 +1,4 @@
-package com.example.restaurantreview.ui
+package com.example.restaurantreview.ui.profile
 
 import android.os.Bundle
 import android.view.View
@@ -10,18 +10,15 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.restaurantreview.R
 import com.example.restaurantreview.data.response.GithubUserProfile
-import com.example.restaurantreview.databinding.ActivityDetailUserBinding
-import com.example.restaurantreview.util.SectionsPagerAdapter
-import com.example.restaurantreview.viewmodel.ProfileViewModel
-import com.example.restaurantreview.viewmodel.ProfileViewModelFactory
+import com.example.restaurantreview.databinding.ActivityProfileBinding
+import com.example.restaurantreview.ui.follow.SectionsPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class UserProfileActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityDetailUserBinding
+class ProfileActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityProfileBinding
 
     companion object {
-        const val TAG = "UserProfileActivity"
 
         @StringRes
         private val TAB_TITLES = intArrayOf(
@@ -32,7 +29,7 @@ class UserProfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailUserBinding.inflate(layoutInflater)
+        binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val username = intent?.getStringExtra("username").toString()
@@ -41,10 +38,10 @@ class UserProfileActivity : AppCompatActivity() {
             ViewModelProvider(this, profileViewModelFactory)[ProfileViewModel::class.java]
 
         with(profileViewModel) {
-            userProfile.observe(this@UserProfileActivity) {
+            userProfile.observe(this@ProfileActivity) {
                 showUserProfile(it)
             }
-            isLoading.observe(this@UserProfileActivity) {
+            isLoading.observe(this@ProfileActivity) {
                 showLoading(it)
             }
         }
@@ -65,7 +62,7 @@ class UserProfileActivity : AppCompatActivity() {
     private fun showUserProfile(profile: GithubUserProfile) {
         binding.tvUsername.text = profile.login
         binding.tvDisplayName.text = profile.name
-        Glide.with(this@UserProfileActivity).load(profile.avatarUrl)
+        Glide.with(this@ProfileActivity).load(profile.avatarUrl)
             .diskCacheStrategy(DiskCacheStrategy.DATA).into(binding.ivProfile)
         binding.followerStat.text = getString(R.string.follower_stat, profile.followers)
         binding.followingStat.text = getString(R.string.following_stat, profile.following)

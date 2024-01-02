@@ -1,11 +1,11 @@
-package com.example.restaurantreview.viewmodel
+package com.example.restaurantreview.ui.main
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.restaurantreview.data.response.GithubSearchUser
-import com.example.restaurantreview.data.response.ItemsItem
+import com.example.restaurantreview.data.response.UserAttributes
 import com.example.restaurantreview.data.retrofit.ApiConfig
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,8 +16,8 @@ class SearchViewModel : ViewModel() {
         private const val TAG = "SearchViewModel"
     }
 
-    private val _itemList = MutableLiveData<List<ItemsItem>>()
-    val itemList: LiveData<List<ItemsItem>> = _itemList
+    private val _itemList = MutableLiveData<List<UserAttributes>>()
+    val itemList: LiveData<List<UserAttributes>> = _itemList
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -39,7 +39,6 @@ class SearchViewModel : ViewModel() {
                 if (response.body()?.items?.isNotEmpty() == true) {
                     _itemList.value = response.body()?.items!!
                 } else {
-                    // TODO: if response body is empty then return message user not found
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
             }

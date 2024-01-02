@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.FollowFragment">
+    tools:context=".ui.follow.FollowFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_follow"
@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="19dp"
         android:minHeight="4000dp"
-        app:layout="@layout/item_review"
+        app:layout="@layout/users_list"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

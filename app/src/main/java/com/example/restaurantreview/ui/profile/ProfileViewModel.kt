@@ -1,4 +1,4 @@
-package com.example.restaurantreview.viewmodel
+package com.example.restaurantreview.ui.profile
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -38,7 +38,6 @@ class ProfileViewModel(user: String) : ViewModel() {
                 _isLoading.value = false
                 if (response.body() != null) {
                     _userProfile.value = response.body()
-                    Log.d(TAG, "getProfile di panggil!")
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }

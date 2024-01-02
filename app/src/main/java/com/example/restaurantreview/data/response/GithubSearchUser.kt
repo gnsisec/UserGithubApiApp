@@ -11,10 +11,10 @@ data class GithubSearchUser(
     val incompleteResults: Boolean? = null,
 
     @field:SerializedName("items")
-    val items: List<ItemsItem>? = null,
+    val items: List<UserAttributes>? = null,
 )
 
-data class ItemsItem(
+data class UserAttributes(
 
     @field:SerializedName("gists_url")
     val gistsUrl: String? = null,

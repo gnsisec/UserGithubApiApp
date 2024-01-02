@@ -1,4 +1,4 @@
-package com.example.restaurantreview.ui
+package com.example.restaurantreview.ui.follow
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.restaurantreview.data.response.ItemsItem
+import com.example.restaurantreview.data.response.UserAttributes
 import com.example.restaurantreview.databinding.FragmentFollowBinding
-import com.example.restaurantreview.ui.adapter.SearchResultAdapter
-import com.example.restaurantreview.viewmodel.FollowViewModel
-import com.example.restaurantreview.viewmodel.FollowViewModelFactory
+import com.example.restaurantreview.ui.main.SearchResultAdapter
 
 
 class FollowFragment : Fragment() {
@@ -22,7 +20,6 @@ class FollowFragment : Fragment() {
     private var username = ""
 
     companion object {
-        private const val TAG = "FollowStatsFragment"
         var ARG_POSITION = "position"
         var ARG_USERNAME = "username"
     }
@@ -40,7 +37,7 @@ class FollowFragment : Fragment() {
 
         arguments?.let {
             position = it.getInt(ARG_POSITION)
-            username = it.getString(ARG_USERNAME).toString()!!
+            username = it.getString(ARG_USERNAME).toString()
         }
 
         val followViewModelFactory = FollowViewModelFactory(username)
@@ -67,7 +64,7 @@ class FollowFragment : Fragment() {
         _binding = null
     }
 
-    private fun showListFollow(followList: List<ItemsItem>) {
+    private fun showListFollow(followList: List<UserAttributes>) {
         val adapter = SearchResultAdapter()
         adapter.submitList(followList)
         binding.listFollow.layoutManager = LinearLayoutManager(requireActivity())
