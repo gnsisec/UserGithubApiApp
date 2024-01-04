@@ -44,15 +44,25 @@ class MainActivity : AppCompatActivity() {
         searchViewModel.isLoading.observe(this) {
             showLoading(it)
         }
+
+        searchViewModel.isNetworkFailed.observe(this) {
+            showNetworkStatus(it)
+        }
     }
 
     private fun displayResult(searchResult: List<UserAttributes>) {
         val adapter = SearchResultAdapter()
         adapter.submitList(searchResult)
+        binding.rvReview.visibility = View.VISIBLE
         binding.rvReview.adapter = adapter
     }
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun showNetworkStatus(onFailure: Boolean) {
+        binding.rvReview.visibility = View.GONE
+        binding.ivNetwork.visibility = if (onFailure) View.VISIBLE else View.GONE
     }
 }

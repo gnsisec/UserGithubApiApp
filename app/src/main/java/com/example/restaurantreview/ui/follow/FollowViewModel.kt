@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package com.example.restaurantreview.ui.follow
 
 import android.util.Log

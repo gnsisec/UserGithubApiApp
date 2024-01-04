@@ -22,11 +22,15 @@ class SearchViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _isNetworkFailed = MutableLiveData<Boolean>()
+    val isNetworkFailed: LiveData<Boolean> = _isNetworkFailed
+
     init {
         searchUser("Bambang")
     }
 
      fun searchUser(user: String) {
+        _isNetworkFailed.value = false
         _isLoading.value = true
 
         val client = ApiConfig.getApiService().getSearchUser(user)
@@ -38,6 +42,7 @@ class SearchViewModel : ViewModel() {
                 _isLoading.value = false
                 if (response.body()?.items?.isNotEmpty() == true) {
                     _itemList.value = response.body()?.items!!
+                    Log.e(TAG, "onSuccess: ${response.message()}")
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
@@ -45,6 +50,7 @@ class SearchViewModel : ViewModel() {
 
             override fun onFailure(call: Call<GithubSearchUser>, t: Throwable) {
                 _isLoading.value = false
+                _isNetworkFailed.value = true
                 Log.e(TAG, "onFailure: ${t.message}")
             }
         })

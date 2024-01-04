@@ -23,6 +23,8 @@ class ProfileViewModel(user: String) : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _isNetworkFailed = MutableLiveData<Boolean>()
+    val isNetworkFailed: LiveData<Boolean> = _isNetworkFailed
     init {
         getProfile(username)
     }
@@ -45,6 +47,7 @@ class ProfileViewModel(user: String) : ViewModel() {
 
             override fun onFailure(call: Call<GithubUserProfile>, t: Throwable) {
                 _isLoading.value = false
+                _isNetworkFailed.value = true
                 Log.e(TAG, "onFailure: ${t.message}")
             }
         })

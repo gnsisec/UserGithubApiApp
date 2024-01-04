@@ -22,8 +22,7 @@ class ProfileActivity : AppCompatActivity() {
 
         @StringRes
         private val TAB_TITLES = intArrayOf(
-            R.string.tab_text_1,
-            R.string.tab_text_2
+            R.string.tab_text_1, R.string.tab_text_2
         )
     }
 
@@ -43,6 +42,9 @@ class ProfileActivity : AppCompatActivity() {
             }
             isLoading.observe(this@ProfileActivity) {
                 showLoading(it)
+            }
+            isNetworkFailed.observe(this@ProfileActivity) {
+                showNetworkStatus(it)
             }
         }
 
@@ -70,5 +72,10 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun showNetworkStatus(onFailure: Boolean) {
+        binding.layoutTab.visibility = View.GONE
+        binding.ivNetwork.visibility = if (onFailure) View.VISIBLE else View.GONE
     }
 }

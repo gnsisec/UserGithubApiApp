@@ -102,4 +102,17 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="gone" />
 
+    <ImageView
+        android:id="@+id/iv_network"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="centerInside"
+        android:visibility="gone"
+        android:paddingBottom="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_network_error"
+        android:contentDescription="@string/network_error" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
