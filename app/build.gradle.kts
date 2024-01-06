@@ -13,8 +13,9 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
+        buildConfigField("String", "AUTH_TOKEN", "\"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\"")
     }
 
     buildTypes {
@@ -36,6 +37,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 

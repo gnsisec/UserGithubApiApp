@@ -26,7 +26,7 @@ class SearchViewModel : ViewModel() {
     val isNetworkFailed: LiveData<Boolean> = _isNetworkFailed
 
     init {
-        searchUser("Bambang")
+        searchUser("budi")
     }
 
      fun searchUser(user: String) {
