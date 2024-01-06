@@ -5,8 +5,10 @@
     android:id="@+id/item_review"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="16dp">
+    android:paddingStart="16dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="8dp">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_item"
@@ -14,6 +16,7 @@
         android:layout_height="55dp"
         android:layout_marginStart="20dp"
         android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
@@ -23,13 +26,13 @@
         android:id="@+id/tv_item"
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="wrap_content"
-        android:minWidth="290dp"
         android:layout_height="wrap_content"
         android:lines="1"
-        android:text="@string/dummy_username"
-        android:textSize="18sp"
+        android:minWidth="290dp"
         android:paddingStart="20dp"
         android:paddingEnd="0dp"
+        android:text="@string/dummy_username"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_item"
         app:layout_constraintTop_toTopOf="parent"

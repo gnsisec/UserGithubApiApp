@@ -35,60 +35,50 @@
         style="@style/TextAppearance.MaterialComponents.Caption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="15dp"
         android:textAlignment="center"
         android:textStyle="italic"
         app:layout_constraintTop_toBottomOf="@id/tv_username"
         tools:text="Budi" />
 
-    <LinearLayout
-        android:layout_marginTop="20dp"
-        android:id="@+id/follow_stat"
+    <TextView
+        android:id="@+id/follower_stat"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_display_name"
+        tools:text="34 Followers" />
+
+    <TextView
+        android:id="@+id/following_stat"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_display_name"
+        tools:text="55 Followings" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/tv_display_name">
+        app:layout_constraintBottom_toTopOf="@id/view_pager"
+        app:layout_constraintTop_toBottomOf="@id/follower_stat"
+        app:tabTextColor="@color/black"
+        tools:ignore="SpeakableTextPresentCheck" />
 
-        <TextView
-            android:id="@+id/follower_stat"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingEnd="30dp"
-            android:paddingStart="0dp"
-            tools:text="34 Followers" />
-
-        <TextView
-            android:id="@+id/following_stat"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:paddingStart="30dp"
-            android:paddingEnd="0dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/tv_display_name"
-            tools:text="55 Followings" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_tab"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
+        android:paddingTop="-20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/follow_stat">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabTextColor="@color/black"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabs" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -106,13 +96,13 @@
         android:id="@+id/iv_network"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:scaleType="centerInside"
-        android:visibility="gone"
+        android:contentDescription="@string/network_error"
         android:paddingBottom="40dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_network_error"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_network_error"
-        android:contentDescription="@string/network_error" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

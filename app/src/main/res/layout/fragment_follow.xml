@@ -11,7 +11,6 @@
         android:id="@+id/list_follow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="19dp"
         app:layout="@layout/users_list"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

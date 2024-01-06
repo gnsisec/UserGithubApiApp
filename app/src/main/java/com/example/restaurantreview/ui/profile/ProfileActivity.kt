@@ -75,7 +75,8 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun showNetworkStatus(onFailure: Boolean) {
-        binding.layoutTab.visibility = View.GONE
+        binding.tabs.visibility = View.GONE
+        binding.viewPager.visibility = View.GONE
         binding.ivNetwork.visibility = if (onFailure) View.VISIBLE else View.GONE
     }
 }
