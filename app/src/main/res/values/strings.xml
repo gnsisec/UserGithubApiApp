@@ -7,4 +7,7 @@
     <string name="tab_text_1">Followers</string>
     <string name="tab_text_2">Following</string>
     <string name="network_error">network error</string>
+    <string name="menu_1">Bookmark Profile</string>
+    <string name="menu_2">Dark Mode</string>
+    <string name="dark_mode">Dark mode</string>
 </resources>

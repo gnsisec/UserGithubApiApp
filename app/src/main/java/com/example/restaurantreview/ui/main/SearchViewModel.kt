@@ -11,13 +11,18 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class SearchViewModel : ViewModel() {
     companion object {
         private const val TAG = "SearchViewModel"
     }
 
-    private val _itemList = MutableLiveData<List<UserAttributes>>()
-    val itemList: LiveData<List<UserAttributes>> = _itemList
+
+    private val _users = MutableLiveData<List<UserAttributes>>()
+    val users: LiveData<List<UserAttributes>> = _users
+
+    private val _darkMode = MutableLiveData<Boolean>()
+    val darkMode: LiveData<Boolean> = _darkMode
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -26,12 +31,17 @@ class SearchViewModel : ViewModel() {
     val isNetworkFailed: LiveData<Boolean> = _isNetworkFailed
 
     init {
-        searchUser("Bambang")
+        searchUser("budi")
     }
 
-     fun searchUser(user: String) {
+    fun darkMode( mode : Boolean ) {
+        _darkMode.value = mode
+    }
+
+    fun searchUser(user: String) {
         _isNetworkFailed.value = false
         _isLoading.value = true
+        Log.d("SVModel", "ke pangging dengan $user")
 
         val client = ApiConfig.getApiService().getSearchUser(user)
         client.enqueue(object : Callback<GithubSearchUser> {
@@ -41,7 +51,7 @@ class SearchViewModel : ViewModel() {
             ) {
                 _isLoading.value = false
                 if (response.body()?.items?.isNotEmpty() == true) {
-                    _itemList.value = response.body()?.items!!
+                    _users.value = response.body()?.items!!
                     Log.e(TAG, "onSuccess: ${response.message()}")
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
