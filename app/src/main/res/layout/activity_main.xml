@@ -9,6 +9,7 @@
     <com.google.android.material.search.SearchBar
         android:id="@+id/search_bar"
         android:layout_width="0dp"
+        app:menu="@menu/option_menu"
         android:layout_height="wrap_content"
         android:hint="@string/searchbar_hint"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,13 +51,13 @@
         android:id="@+id/iv_network"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:scaleType="centerInside"
-        android:visibility="gone"
+        android:contentDescription="@string/network_error"
         android:paddingBottom="40dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_network_error"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/rv_review"
-        android:src="@drawable/ic_network_error"
-        android:contentDescription="@string/network_error" />
+        app:layout_constraintTop_toTopOf="@id/rv_review" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

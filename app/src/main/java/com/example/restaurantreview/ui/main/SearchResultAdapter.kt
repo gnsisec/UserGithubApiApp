@@ -17,7 +17,7 @@ class SearchResultAdapter :
     class ViewHolder(private val binding: UsersListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(userInfo: UserAttributes) {
-            binding.tvItem.text = "${userInfo.login}".replaceFirstChar { it.uppercase() }
+            binding.tvItem.text = "${userInfo.login}"
             Glide.with(this@ViewHolder.itemView.context).load("${userInfo.avatarUrl}")
                 .diskCacheStrategy(DiskCacheStrategy.DATA).into(binding.ivItem)
 

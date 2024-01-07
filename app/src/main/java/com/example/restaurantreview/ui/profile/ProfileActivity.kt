@@ -62,8 +62,8 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun showUserProfile(profile: GithubUserProfile) {
-        binding.tvUsername.text = profile.login
-        binding.tvDisplayName.text = profile.name
+        binding.tvUsername.text = profile.name
+        binding.tvDisplayName.text = profile.login
         Glide.with(this@ProfileActivity).load(profile.avatarUrl)
             .diskCacheStrategy(DiskCacheStrategy.DATA).into(binding.ivProfile)
         binding.followerStat.text = getString(R.string.follower_stat, profile.followers)
