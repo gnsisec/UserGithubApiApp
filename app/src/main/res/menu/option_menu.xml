@@ -4,7 +4,7 @@
     <group android:menuCategory="container">
         <item
             android:id="@+id/bookmark_profile"
-            android:icon="@drawable/baseline_bookmark_24"
+            android:icon="@drawable/ic_bookmark"
             android:title="@string/menu_1"
             app:showAsAction="ifRoom" />
         <item
