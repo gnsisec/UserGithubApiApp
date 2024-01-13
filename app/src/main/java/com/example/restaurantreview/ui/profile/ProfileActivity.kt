@@ -2,6 +2,7 @@ package com.example.restaurantreview.ui.profile
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -32,9 +33,17 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val username = intent?.getStringExtra("username").toString()
+        val avatarUrl = intent?.getStringExtra("avatarUrl").toString()
         val profileViewModelFactory = ProfileViewModelFactory(username)
         val profileViewModel =
             ViewModelProvider(this, profileViewModelFactory)[ProfileViewModel::class.java]
+
+
+        val bookmarkUserFactory: BookmarkUserViewModelFactory =
+            BookmarkUserViewModelFactory.getInstance(application)
+        val bookmarkUserViewModel: BookmarkUserViewModel by viewModels {
+            bookmarkUserFactory
+        }
 
         with(profileViewModel) {
             userProfile.observe(this@ProfileActivity) {
@@ -59,6 +68,26 @@ class ProfileActivity : AppCompatActivity() {
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
 
+        bookmarkUserViewModel.isBookmarked(username).observe(this) { state ->
+            if (state) {
+                binding.fabBtn.setOnClickListener {
+                    bookmarkUserViewModel.removeBookmarkedUser(username, avatarUrl)
+                }
+            } else {
+                binding.fabBtn.setOnClickListener {
+                    bookmarkUserViewModel.setBookmarkedUser(username, avatarUrl)
+                }
+            }
+            setBookmarkedIcon(state)
+        }
+    }
+
+    private fun setBookmarkedIcon(state: Boolean) {
+        if (state) {
+            binding.fabBtn.setImageResource(R.drawable.ic_bookmark)
+        } else {
+            binding.fabBtn.setImageResource(R.drawable.ic_bookmark_border)
+        }
     }
 
     private fun showUserProfile(profile: GithubUserProfile) {

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.restaurantreview.R
 import com.example.restaurantreview.databinding.ActivityMainBinding
+import com.example.restaurantreview.ui.bookmarkedUser.BookmarkedUsersListActivity
 import com.example.restaurantreview.ui.darkmode.DarkModeActivity
 import com.example.restaurantreview.ui.darkmode.DarkModeViewModel
 import com.example.restaurantreview.ui.darkmode.DarkModeViewModelFactory
@@ -60,6 +61,7 @@ class MainActivity : AppCompatActivity() {
                 when (menuItem.itemId) {
                     R.id.bookmark_profile -> {
                         Log.d("MainActivity", "bookmark trigger")
+                        startActivity(Intent(this@MainActivity, BookmarkedUsersListActivity::class.java))
                         true
                     }
 
@@ -98,7 +100,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onRestart() {
-        Log.d("MainActivity", "onRestart")
         super.onRestart()
     }
 
