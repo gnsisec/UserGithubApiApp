@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.example.restaurantreview.data.response.UserAttributes
+import com.example.restaurantreview.data.remote.response.UserAttributes
 import com.example.restaurantreview.databinding.UsersListBinding
 import com.example.restaurantreview.ui.profile.ProfileActivity
 

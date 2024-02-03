@@ -10,7 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.restaurantreview.R
-import com.example.restaurantreview.data.response.GithubUserProfile
+import com.example.restaurantreview.data.remote.response.GithubUserProfile
 import com.example.restaurantreview.databinding.ActivityProfileBinding
 import com.example.restaurantreview.ui.follow.SectionsPagerAdapter
 import com.google.android.material.tabs.TabLayout

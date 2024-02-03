@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.restaurantreview.data.response.UserAttributes
+import com.example.restaurantreview.data.remote.response.UserAttributes
 import com.example.restaurantreview.databinding.ActivityBookmarkedUsersBinding
 import com.example.restaurantreview.ui.main.SearchResultAdapter
 

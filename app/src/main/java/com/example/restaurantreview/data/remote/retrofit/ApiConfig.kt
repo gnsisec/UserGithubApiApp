@@ -1,4 +1,4 @@
-package com.example.restaurantreview.data.retrofit
+package com.example.restaurantreview.data.remote.retrofit
 
 import com.example.restaurantreview.BuildConfig
 import okhttp3.Interceptor

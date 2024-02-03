@@ -1,8 +1,8 @@
-package com.example.restaurantreview.data.retrofit
+package com.example.restaurantreview.data.remote.retrofit
 
-import com.example.restaurantreview.data.response.GithubSearchUser
-import com.example.restaurantreview.data.response.GithubUserProfile
-import com.example.restaurantreview.data.response.UserAttributes
+import com.example.restaurantreview.data.remote.response.GithubSearchUser
+import com.example.restaurantreview.data.remote.response.GithubUserProfile
+import com.example.restaurantreview.data.remote.response.UserAttributes
 import retrofit2.Call
 import retrofit2.http.*
 

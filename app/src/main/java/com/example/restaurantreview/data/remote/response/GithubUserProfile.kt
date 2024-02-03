@@ -1,4 +1,4 @@
-package com.example.restaurantreview.data.response
+package com.example.restaurantreview.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 

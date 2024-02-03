@@ -99,10 +99,6 @@ class MainActivity : AppCompatActivity() {
         binding.rvReview.addItemDecoration(itemDecoration)
     }
 
-    override fun onRestart() {
-        super.onRestart()
-    }
-
     private fun displayResult() {
         val adapter = SearchResultAdapter()
         adapter.submitList(searchViewModel.users.value)

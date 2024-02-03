@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="dark_blue">#0C2D57</color>
-    <color name="white">#FFFFFF</color>
-    <color name="soft_pink">#FFB0B0</color>>
+<resources><![CDATA[
+
+
+    >
+    ]]>
     <color name="soft_white">#EFECEC</color>
     <color name="github_black_1">#24292e</color>
     <color name="orange">#FC6736</color>

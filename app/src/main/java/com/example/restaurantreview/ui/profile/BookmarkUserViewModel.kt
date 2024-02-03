@@ -1,15 +1,10 @@
 package com.example.restaurantreview.ui.profile
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
-import com.bumptech.glide.Glide.init
 import com.example.restaurantreview.data.BookmarkedUserRepository
 import com.example.restaurantreview.data.local.entity.BookmarkedUserEntity
-import com.example.restaurantreview.data.local.room.BookmarkedUserDao
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class BookmarkUserViewModel(private val bookmarkedUserRepository: BookmarkedUserRepository) : ViewModel() {
