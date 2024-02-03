@@ -14,6 +14,8 @@
         android:text="@string/dark_mode"
         android:textSize="20sp"
         app:switchPadding="20dp"
+        app:trackTint="@color/soft_white"
+        app:thumbTint="@color/orange"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
