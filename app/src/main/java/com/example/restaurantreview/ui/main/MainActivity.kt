@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var searchViewModel: SearchViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_RestaurantReview)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -61,7 +62,12 @@ class MainActivity : AppCompatActivity() {
                 when (menuItem.itemId) {
                     R.id.bookmark_profile -> {
                         Log.d("MainActivity", "bookmark trigger")
-                        startActivity(Intent(this@MainActivity, BookmarkedUsersListActivity::class.java))
+                        startActivity(
+                            Intent(
+                                this@MainActivity,
+                                BookmarkedUsersListActivity::class.java
+                            )
+                        )
                         true
                     }
 

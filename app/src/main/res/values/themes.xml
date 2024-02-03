@@ -8,4 +8,17 @@
         <item name="colorPrimary">@color/github_black_1</item>
         <item name="android:textColorPrimary">@color/github_black_1</item>
     </style>
+
+    <style name="Theme.Launcher" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/github_black_1</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/github_icon_vector_foreground</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+    </style>
+
+<!--    <style name="Theme.AppSplash" parent="Theme.SplashScreen">-->
+<!--        <item name="windowSplashScreenBackground">@color/orange</item>-->
+<!--        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_round</item>-->
+<!--        <item name="windowSplashScreenAnimationDuration">1000</item>-->
+<!--        <item name="postSplashScreenTheme">@style/Theme.Material3.Light.NoActionBar</item>-->
+<!--    </style>-->
 </resources>
