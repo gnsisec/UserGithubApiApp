@@ -6,7 +6,7 @@
             android:id="@+id/bookmark_profile"
             android:icon="@drawable/ic_bookmark"
             android:title="@string/menu_1"
-            app:showAsAction="ifRoom" />
+            app:showAsAction="ifRoom"/>
         <item
             android:id="@+id/dark_mode"
             android:title="@string/menu_2"

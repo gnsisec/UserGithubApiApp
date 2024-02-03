@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
+    <color name="dark_blue">#0C2D57</color>
     <color name="white">#FFFFFF</color>
+    <color name="soft_pink">#FFB0B0</color>>
+    <color name="soft_white">#EFECEC</color>
     <color name="github_black_1">#24292e</color>
-    <color name="github_black_2">#2b3137</color>
-    <color name="orange">#FFFFFF</color>
+    <color name="orange">#FC6736</color>
 </resources>
