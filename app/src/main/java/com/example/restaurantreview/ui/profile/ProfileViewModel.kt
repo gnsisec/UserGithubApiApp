@@ -25,6 +25,7 @@ class ProfileViewModel(user: String) : ViewModel() {
 
     private val _isNetworkFailed = MutableLiveData<Boolean>()
     val isNetworkFailed: LiveData<Boolean> = _isNetworkFailed
+
     init {
         getProfile(username)
     }

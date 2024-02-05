@@ -21,7 +21,8 @@ class BookmarkedUsersListViewModelFactory private constructor(private val bookma
         private var instance: BookmarkedUsersListViewModelFactory? = null
         fun getInstance(context: Context): BookmarkedUsersListViewModelFactory =
             instance ?: synchronized(this) {
-                instance ?: BookmarkedUsersListViewModelFactory(Injection.provideRepository(context))
+                instance
+                    ?: BookmarkedUsersListViewModelFactory(Injection.provideRepository(context))
             }.also { instance = it }
     }
 }

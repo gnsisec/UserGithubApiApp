@@ -11,7 +11,7 @@ import com.example.restaurantreview.data.local.entity.BookmarkedUserEntity
 @Dao
 interface BookmarkedUserDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(user : BookmarkedUserEntity )
+    suspend fun insert(user: BookmarkedUserEntity)
 
     @Delete
     suspend fun delete(user: BookmarkedUserEntity)
@@ -20,5 +20,5 @@ interface BookmarkedUserDao {
     fun getAllBookmarkedUser(): LiveData<List<BookmarkedUserEntity>>
 
     @Query("SELECT EXISTS(SELECT * FROM bookmarked_user WHERE username = :user)")
-    fun isUserBookmarked(user: String) : LiveData<Boolean>
+    fun isUserBookmarked(user: String): LiveData<Boolean>
 }

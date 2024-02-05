@@ -34,7 +34,7 @@ class SearchViewModel : ViewModel() {
         searchUser("budi")
     }
 
-    fun darkMode( mode : Boolean ) {
+    fun darkMode(mode: Boolean) {
         _darkMode.value = mode
     }
 

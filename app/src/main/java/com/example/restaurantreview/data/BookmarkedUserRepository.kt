@@ -15,9 +15,10 @@ class BookmarkedUserRepository private constructor(
         bookmarkedUserDao.delete(user)
     }
 
-    fun isUserBookmarked(user: String) : LiveData<Boolean> = bookmarkedUserDao.isUserBookmarked(user)
+    fun isUserBookmarked(user: String): LiveData<Boolean> = bookmarkedUserDao.isUserBookmarked(user)
 
-    fun getAllBookmarked(): LiveData<List<BookmarkedUserEntity>> = bookmarkedUserDao.getAllBookmarkedUser()
+    fun getAllBookmarked(): LiveData<List<BookmarkedUserEntity>> =
+        bookmarkedUserDao.getAllBookmarkedUser()
 
     companion object {
         @Volatile

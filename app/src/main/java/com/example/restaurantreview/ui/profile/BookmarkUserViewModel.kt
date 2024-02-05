@@ -7,10 +7,11 @@ import com.example.restaurantreview.data.BookmarkedUserRepository
 import com.example.restaurantreview.data.local.entity.BookmarkedUserEntity
 import kotlinx.coroutines.launch
 
-class BookmarkUserViewModel(private val bookmarkedUserRepository: BookmarkedUserRepository) : ViewModel() {
+class BookmarkUserViewModel(private val bookmarkedUserRepository: BookmarkedUserRepository) :
+    ViewModel() {
     private val bookmarkedUserEntity = BookmarkedUserEntity()
 
-    fun isBookmarked(username: String) : LiveData<Boolean> {
+    fun isBookmarked(username: String): LiveData<Boolean> {
         return bookmarkedUserRepository.isUserBookmarked(username)
     }
 

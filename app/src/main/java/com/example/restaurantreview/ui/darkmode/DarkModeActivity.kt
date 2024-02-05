@@ -35,7 +35,7 @@ class DarkModeActivity : AppCompatActivity() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 darkModeBinding.switchMode.isChecked = false
                 darkModeBinding.switchMode.trackTintList =
-                ColorStateList.valueOf(R.color.github_black_1.toInt())
+                    ColorStateList.valueOf(R.color.github_black_1.toInt())
             }
         }
 
