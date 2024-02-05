@@ -41,7 +41,6 @@ class SearchViewModel : ViewModel() {
     fun searchUser(user: String) {
         _isNetworkFailed.value = false
         _isLoading.value = true
-        Log.d("SVModel", "ke pangging dengan $user")
 
         val client = ApiConfig.getApiService().getSearchUser(user)
         client.enqueue(object : Callback<GithubSearchUser> {

@@ -2,7 +2,6 @@ package com.example.restaurantreview.ui.darkmode
 
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.util.Log
 import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -32,13 +31,11 @@ class DarkModeActivity : AppCompatActivity() {
             if (isDarkActive) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 darkModeBinding.switchMode.isChecked = true
-                Log.d("DarkModeActivity", "YES check ${searchViewModel.users}")
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 darkModeBinding.switchMode.isChecked = false
                 darkModeBinding.switchMode.trackTintList =
-                    ColorStateList.valueOf(R.color.github_black_1.toInt())
-                Log.d("DarkModeActivity", "NO check ${searchViewModel.users}")
+                ColorStateList.valueOf(R.color.github_black_1.toInt())
             }
         }
 

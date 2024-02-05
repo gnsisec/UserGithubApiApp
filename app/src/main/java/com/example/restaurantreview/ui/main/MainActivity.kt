@@ -2,7 +2,6 @@ package com.example.restaurantreview.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -40,10 +39,8 @@ class MainActivity : AppCompatActivity() {
         darkModeViewModel.getThemeSettings().observe(this) { isDarkActive: Boolean ->
             if (isDarkActive) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                Log.d("MainActivity", "Dark Mode Active")
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                Log.d("MainActivity", "Dark Mode Deactive")
             }
             searchViewModel.darkMode(isDarkActive)
         }
@@ -61,7 +58,6 @@ class MainActivity : AppCompatActivity() {
             searchBar.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.bookmark_profile -> {
-                        Log.d("MainActivity", "bookmark trigger")
                         startActivity(
                             Intent(
                                 this@MainActivity,
@@ -72,7 +68,6 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.dark_mode -> {
-                        Log.d("MainActivity", "darkmode trigger")
                         startActivity(Intent(this@MainActivity, DarkModeActivity::class.java))
                         true
                     }
