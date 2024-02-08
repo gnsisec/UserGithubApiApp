@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayResult() {
-        val adapter = SearchResultAdapter()
+        val adapter = UserListAdapter()
         adapter.submitList(searchViewModel.searchResult.value)
         binding.rvUsers.visibility = View.VISIBLE
         binding.rvUsers.adapter = adapter

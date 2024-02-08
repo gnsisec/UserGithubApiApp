@@ -10,12 +10,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ProfileViewModel(user: String) : ViewModel() {
+class ProfileViewModel(username: String) : ViewModel() {
     companion object {
         private const val TAG = "ProfileViewModel"
     }
-
-    private val username = user
 
     private val _userProfile = MutableLiveData<GithubUserProfile>()
     val userProfile: LiveData<GithubUserProfile> = _userProfile

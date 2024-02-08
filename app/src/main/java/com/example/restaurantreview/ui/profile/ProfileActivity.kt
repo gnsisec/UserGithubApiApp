@@ -11,7 +11,10 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.restaurantreview.R
 import com.example.restaurantreview.data.remote.response.GithubUserProfile
 import com.example.restaurantreview.databinding.ActivityProfileBinding
+import com.example.restaurantreview.ui.bookmarkedUser.BookmarkUserViewModel
 import com.example.restaurantreview.ui.follow.SectionsPagerAdapter
+import com.example.restaurantreview.utils.BookmarkUserViewModelFactory
+import com.example.restaurantreview.utils.ViewModelFactory
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -20,12 +23,10 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var username: String
     private lateinit var avatarUrl: String
     private val bookmarkUserViewModel: BookmarkUserViewModel by viewModels {
-        BookmarkUserViewModelFactory.getInstance(
-            application
-        )
+        BookmarkUserViewModelFactory.getInstance(application)
     }
     private val profileViewModel: ProfileViewModel by viewModels {
-        ProfileViewModelFactory(username)
+        ViewModelFactory(username)
     }
 
     companion object {

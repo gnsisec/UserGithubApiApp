@@ -10,13 +10,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FollowViewModel(user: String) : ViewModel() {
+class FollowViewModel(private val username: String) : ViewModel() {
 
     companion object {
         private const val TAG = "FollowViewModel"
     }
-
-    private val username = user
 
     private val _listFollower = MutableLiveData<List<UserAttributes>>()
     val listFollower: LiveData<List<UserAttributes>> = _listFollower

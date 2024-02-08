@@ -8,8 +8,8 @@ import androidx.room.PrimaryKey
 data class BookmarkedUserEntity(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "username")
-    var username: String = "sapri",
+    var username: String = "username",
 
     @ColumnInfo(name = "avatarUrl")
-    var avatarUrl: String = "lalala",
+    var avatarUrl: String = "avatarUrl",
 )

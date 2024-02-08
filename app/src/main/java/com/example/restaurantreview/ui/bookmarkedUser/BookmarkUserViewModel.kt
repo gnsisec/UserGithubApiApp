@@ -1,4 +1,4 @@
-package com.example.restaurantreview.ui.profile
+package com.example.restaurantreview.ui.bookmarkedUser
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +10,10 @@ import kotlinx.coroutines.launch
 class BookmarkUserViewModel(private val bookmarkedUserRepository: BookmarkedUserRepository) :
     ViewModel() {
     private val bookmarkedUserEntity = BookmarkedUserEntity()
+
+    fun getAllBookmarked(): LiveData<List<BookmarkedUserEntity>> {
+        return bookmarkedUserRepository.getAllBookmarked()
+    }
 
     fun isBookmarked(username: String): LiveData<Boolean> {
         return bookmarkedUserRepository.isUserBookmarked(username)

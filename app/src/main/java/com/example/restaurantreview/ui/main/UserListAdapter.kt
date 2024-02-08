@@ -12,8 +12,8 @@ import com.example.restaurantreview.data.remote.response.UserAttributes
 import com.example.restaurantreview.databinding.UsersListBinding
 import com.example.restaurantreview.ui.profile.ProfileActivity
 
-class SearchResultAdapter :
-    ListAdapter<UserAttributes, SearchResultAdapter.ViewHolder>(DIFF_CALLBACK) {
+class UserListAdapter :
+    ListAdapter<UserAttributes, UserListAdapter.ViewHolder>(DIFF_CALLBACK) {
     class ViewHolder(private val binding: UsersListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(userInfo: UserAttributes) {

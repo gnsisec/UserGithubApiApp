@@ -5,19 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.restaurantreview.data.remote.response.UserAttributes
 import com.example.restaurantreview.databinding.FragmentFollowBinding
-import com.example.restaurantreview.ui.main.SearchResultAdapter
+import com.example.restaurantreview.ui.main.UserListAdapter
+import com.example.restaurantreview.utils.ViewModelFactory
 
 
 class FollowFragment : Fragment() {
 
     private var _binding: FragmentFollowBinding? = null
     private val binding get() = _binding!!
+    private lateinit var username : String
+    private val followViewModel: FollowViewModel by viewModels { ViewModelFactory(username) }
     private var position: Int = 0
-    private var username = ""
 
     companion object {
         var ARG_POSITION = "position"
@@ -40,10 +42,15 @@ class FollowFragment : Fragment() {
             username = it.getString(ARG_USERNAME).toString()
         }
 
-        val followViewModelFactory = FollowViewModelFactory(username)
-        val followViewModel =
-            ViewModelProvider(this, followViewModelFactory)[FollowViewModel::class.java]
+        followObserver()
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+    private fun followObserver() {
         followViewModel.isLoading.observe(viewLifecycleOwner) {
             showLoading(it)
         }
@@ -59,13 +66,8 @@ class FollowFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
     private fun showListFollow(followList: List<UserAttributes>) {
-        val adapter = SearchResultAdapter()
+        val adapter = UserListAdapter()
         adapter.submitList(followList)
         binding.listFollow.layoutManager = LinearLayoutManager(requireActivity())
         binding.listFollow.adapter = adapter

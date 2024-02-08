@@ -8,27 +8,34 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.restaurantreview.data.remote.response.UserAttributes
 import com.example.restaurantreview.databinding.ActivityBookmarkedUsersBinding
-import com.example.restaurantreview.ui.main.SearchResultAdapter
+import com.example.restaurantreview.ui.main.UserListAdapter
+import com.example.restaurantreview.utils.BookmarkUserViewModelFactory
 
 class BookmarkedUsersListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBookmarkedUsersBinding
+    private val adapter : UserListAdapter = UserListAdapter()
+    private val bookmarkUserViewModel: BookmarkUserViewModel by viewModels { BookmarkUserViewModelFactory.getInstance(application) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBookmarkedUsersBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        getBookmarkedUsers()
+        initBookmarkedUsersLayout()
+    }
+
+    private fun initBookmarkedUsersLayout() {
         val layoutManager = LinearLayoutManager(this)
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
+        binding.rvUsers.addItemDecoration(itemDecoration)
+        binding.rvUsers.layoutManager = layoutManager
+        binding.rvUsers.visibility = View.VISIBLE
+        binding.rvUsers.adapter = adapter
+    }
 
-        val adapter = SearchResultAdapter()
-        val bookmarkedUsersListViewModelFactory: BookmarkedUsersListViewModelFactory =
-            BookmarkedUsersListViewModelFactory.getInstance(application)
-        val bookmarkedUsersListViewModel: BookmarkedUsersListViewModel by viewModels { bookmarkedUsersListViewModelFactory }
-
-        binding.rvReview.addItemDecoration(itemDecoration)
-
-        bookmarkedUsersListViewModel.getAllBookmarked()
+    private fun getBookmarkedUsers() {
+        bookmarkUserViewModel.getAllBookmarked()
             .observe(this@BookmarkedUsersListActivity) { users ->
                 val items = arrayListOf<UserAttributes>()
                 users.map {
@@ -37,8 +44,5 @@ class BookmarkedUsersListActivity : AppCompatActivity() {
                 }
                 adapter.submitList(items)
             }
-        binding.rvReview.layoutManager = layoutManager
-        binding.rvReview.visibility = View.VISIBLE
-        binding.rvReview.adapter = adapter
     }
 }
