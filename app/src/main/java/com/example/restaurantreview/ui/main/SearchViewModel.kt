@@ -17,12 +17,11 @@ class SearchViewModel : ViewModel() {
         private const val TAG = "SearchViewModel"
     }
 
+    private val _searchResult = MutableLiveData<List<UserAttributes>>()
+    val searchResult: LiveData<List<UserAttributes>> = _searchResult
 
-    private val _users = MutableLiveData<List<UserAttributes>>()
-    val users: LiveData<List<UserAttributes>> = _users
-
-    private val _darkMode = MutableLiveData<Boolean>()
-    val darkMode: LiveData<Boolean> = _darkMode
+    private val _isDarkMode = MutableLiveData<Boolean>()
+    val isDarkMode: LiveData<Boolean> = _isDarkMode
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -35,7 +34,7 @@ class SearchViewModel : ViewModel() {
     }
 
     fun darkMode(mode: Boolean) {
-        _darkMode.value = mode
+        _isDarkMode.value = mode
     }
 
     fun searchUser(user: String) {
@@ -50,7 +49,7 @@ class SearchViewModel : ViewModel() {
             ) {
                 _isLoading.value = false
                 if (response.body()?.items?.isNotEmpty() == true) {
-                    _users.value = response.body()?.items!!
+                    _searchResult.value = response.body()?.items!!
                     Log.e(TAG, "onSuccess: ${response.message()}")
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
