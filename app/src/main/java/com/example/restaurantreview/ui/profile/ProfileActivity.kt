@@ -5,7 +5,6 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -18,9 +17,18 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
+    private lateinit var username: String
+    private lateinit var avatarUrl: String
+    private val bookmarkUserViewModel: BookmarkUserViewModel by viewModels {
+        BookmarkUserViewModelFactory.getInstance(
+            application
+        )
+    }
+    private val profileViewModel: ProfileViewModel by viewModels {
+        ProfileViewModelFactory(username)
+    }
 
     companion object {
-
         @StringRes
         private val TAB_TITLES = intArrayOf(
             R.string.tab_text_1, R.string.tab_text_2
@@ -32,42 +40,13 @@ class ProfileActivity : AppCompatActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val username = intent?.getStringExtra("username").toString()
-        val avatarUrl = intent?.getStringExtra("avatarUrl").toString()
-        val profileViewModelFactory = ProfileViewModelFactory(username)
-        val profileViewModel =
-            ViewModelProvider(this, profileViewModelFactory)[ProfileViewModel::class.java]
+        setProfilesProperties()
+        profileObserver()
+        setViewPager()
+        userBookmarkObeserver()
+    }
 
-
-        val bookmarkUserFactory: BookmarkUserViewModelFactory =
-            BookmarkUserViewModelFactory.getInstance(application)
-        val bookmarkUserViewModel: BookmarkUserViewModel by viewModels {
-            bookmarkUserFactory
-        }
-
-        with(profileViewModel) {
-            userProfile.observe(this@ProfileActivity) {
-                showUserProfile(it)
-            }
-            isLoading.observe(this@ProfileActivity) {
-                showLoading(it)
-            }
-            isNetworkFailed.observe(this@ProfileActivity) {
-                showNetworkStatus(it)
-            }
-        }
-
-        val sectionsPagerAdapter = SectionsPagerAdapter(this)
-        sectionsPagerAdapter.username = username
-
-        val viewPager: ViewPager2 = binding.viewPager
-        viewPager.adapter = sectionsPagerAdapter
-
-        val tabs: TabLayout = binding.tabs
-        TabLayoutMediator(tabs, viewPager) { tab, position ->
-            tab.text = resources.getString(TAB_TITLES[position])
-        }.attach()
-
+    private fun userBookmarkObeserver() {
         bookmarkUserViewModel.isBookmarked(username).observe(this) { state ->
             if (state) {
                 binding.fabBtn.setOnClickListener {
@@ -80,6 +59,39 @@ class ProfileActivity : AppCompatActivity() {
             }
             setBookmarkedIcon(state)
         }
+    }
+
+    private fun profileObserver() {
+        with(profileViewModel) {
+            userProfile.observe(this@ProfileActivity) {
+                showUserProfile(it)
+            }
+            isLoading.observe(this@ProfileActivity) {
+                showLoading(it)
+            }
+            isNetworkFailed.observe(this@ProfileActivity) {
+                showNetworkStatus(it)
+            }
+        }
+    }
+
+    private fun setViewPager() {
+        val sectionsPagerAdapter = SectionsPagerAdapter(this)
+        sectionsPagerAdapter.username = username
+
+        val viewPager: ViewPager2 = binding.viewPager
+        viewPager.adapter = sectionsPagerAdapter
+
+        val tabs: TabLayout = binding.tabs
+        TabLayoutMediator(tabs, viewPager) { tab, position ->
+            tab.text = resources.getString(TAB_TITLES[position])
+        }.attach()
+    }
+
+    private fun setProfilesProperties() {
+        username = intent?.getStringExtra("username").toString()
+        avatarUrl = intent?.getStringExtra("avatarUrl").toString()
+
     }
 
     private fun setBookmarkedIcon(state: Boolean) {
